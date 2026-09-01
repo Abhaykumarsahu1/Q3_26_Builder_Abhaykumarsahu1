@@ -32,13 +32,13 @@ const rpcSubscriptions = createSolanaRpcSubscriptions(
 
 (async () => {
   try {
-//creating  a signer for the wallet
+    //i m the signer here
     const signer = await createKeyPairSignerFromBytes(new Uint8Array(wallet));
 
     //generating a new mint signer for address
     const mint = await generateKeyPairSigner();
 
-    //getting the size of the mint
+    //getting the size of the mint account
     const space = BigInt(getMintSize());
 
     //get the minimum balance for rent- exemption
@@ -54,6 +54,7 @@ const rpcSubscriptions = createSolanaRpcSubscriptions(
     const msgWithLiftime = setTransactionMessageLifetimeUsingBlockhash(latestBlockhash, msgWithPayer);
 
     const txMessage = appendTransactionMessageInstructions([
+      //this instruction has a payer 
       getCreateAccountInstruction({
         payer: signer,
         newAccount: mint,
